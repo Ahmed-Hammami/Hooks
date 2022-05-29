@@ -1,0 +1,8 @@
+.cardlist{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+.cardlist img{
+    height: 300px;
+    width: 300px;
+}
