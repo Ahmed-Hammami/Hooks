@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
-import Filter1 from "./Filter1";
-import { Cardd } from "./list";
-const AddMovie = () => {
-const [show, setShow] = useState(false);
-const [movie,Setmovie]=useState(Cardd);
+
+const AddMovie = ({ NewMovieManagement }) => {
+    const [show, setShow] = useState(false);
+
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [rate, setRate] = useState("")
@@ -14,23 +13,19 @@ const [movie,Setmovie]=useState(Cardd);
         setShow(!show);
     };
 
-  
-        const newMovie = {
+    const handleAdd = () => {
+        let newMovie = {
             title,
             description,
             rate,
             posterUrl
-       
-
+        }
+        NewMovieManagement(newMovie)
+        
     }
-    console.log(movie);
-    
-   console.log(newMovie);
-console.log(Cardd)
-
     return (
-        <><div className="add">
-            <Button style={{ padding: "40px" }} onClick={toggle}> Add movie </Button>
+        <div className="add">
+            <Button variant="danger" style={{padding:"40px"}} onClick={toggle}> Add movie </Button>
 
             <Modal show={show} onHide={toggle}>
                 <Modal.Header closeButton>
@@ -40,11 +35,12 @@ console.log(Cardd)
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicTitle">
                             <Form.Label>Title</Form.Label>
-                            <Form.Control
+                            <Form.Control //input
                                 type="text"
                                 placeholder="Enter title"
                                 value={title}
-                                onChange={(e) => setTitle(e.target.value)} />
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
                         </Form.Group>
 
                         <Form.Group
@@ -56,9 +52,10 @@ console.log(Cardd)
                                 type="text"
                                 placeholder="Enter description"
                                 value={description}
-                                onChange={(e) => setDescription(e.target.value)} />
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
                         </Form.Group>
-
+                        
                         <Form.Group
                             className="mb-3"
                             controlId="formBasicRate"
@@ -68,7 +65,8 @@ console.log(Cardd)
                                 type="text"
                                 placeholder="Enter rate"
                                 value={rate}
-                                onChange={(e) => setRate(e.target.value)} />
+                                onChange={(e) => setRate(e.target.value)}
+                            />
                         </Form.Group>
 
                         <Form.Group
@@ -80,7 +78,8 @@ console.log(Cardd)
                                 type="text"
                                 placeholder="Enter image"
                                 value={posterUrl}
-                                onChange={(e) => setPosterUrl(e.target.value)} />
+                                onChange={(e) => setPosterUrl(e.target.value)}
+                            />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -88,14 +87,13 @@ console.log(Cardd)
                     <Button variant="success" onClick={toggle}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => { Setmovie([...movie, newMovie]); } }>
+                    <Button variant="primary" onClick={() => handleAdd()}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div><Filter1 movie={movie} /></>
+        </div>
     );
-
 };
 
 export default AddMovie;

@@ -1,4 +1,4 @@
- export const Cardd = [
+ export const Data = [
     {
         title: "Her",
         rate: 4,
